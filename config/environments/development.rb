@@ -38,8 +38,5 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
-  Raven.configure do |config|
-    config.dsn = 'https://e6e9e19d380c4b6380a0d8bd924a5602:1c4c3678e3e1401ba527cd8e7638c73d@sentry.io/106346'
-    config.environments = ['staging', 'production', 'development']
-  end
+  
 end

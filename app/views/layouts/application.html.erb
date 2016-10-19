@@ -9,6 +9,15 @@
 <body>
 
 <%= yield %>
-
+<script src="https://cdn.ravenjs.com/2.3.0/raven.min.js"></script>
+<% if flash[:sentry_event_id] %>
+  <script>
+  Raven.showReportDialog({
+    eventId: '<%= flash[:sentry_event_id] %>',
+    // use the public DSN (dont include your secret!)
+    dsn: 'https://e6e9e19d380c4b6380a0d8bd924a5602@sentry.io/106346'
+  });
+  </script>
+<% end %>
 </body>
 </html>
