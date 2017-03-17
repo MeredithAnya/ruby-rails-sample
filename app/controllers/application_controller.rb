@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_raven_context
-    Raven.user_context(id: 2, email: 'meredith@gmail.com') # or anything else in session
+    Raven.user_context(email: 'meredith@gmail.com', id: 2) # or anything else in session
     Raven.extra_context(params: params.to_hash, url: request.url)
   end
 end

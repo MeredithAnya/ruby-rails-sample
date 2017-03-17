@@ -2,14 +2,14 @@ class WelcomeController < ApplicationController
 
   def index
     @user = "meredith"
-    # begin
-    #   1 / 0
-    # rescue StandardError => detail
-    #   Raven.captureException(detail)
-    #   flash[:sentry_event_id] = Raven.last_event_id()
-    # else
-    #   render :index
-    # end
+    begin
+      1 / 0
+    rescue StandardError => detail
+      Raven.captureException(detail)
+      flash[:sentry_event_id] = Raven.last_event_id()
+    else
+      render :index
+    end
     render :index
   end
 
@@ -18,9 +18,11 @@ class WelcomeController < ApplicationController
       raise "meow"
     rescue => detail
       Raven.annotate_exception(detail, {
-          :user => {'person' => 1},
           tags: {
-            meow: "cat"
+            "meow" => "cat"
+          },
+          extra: {
+            "testing_length" => "Where does it come from? Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, comes from a line in section 1.10.32. The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from  by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham. Meing, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
           }
         })
       Raven.captureException(detail)

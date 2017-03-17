@@ -9,13 +9,14 @@
 <body>
 
 <%= yield %>
-<script src="https://cdn.ravenjs.com/2.3.0/raven.min.js"></script>
+<script src="https://cdn.ravenjs.com/3.9.2/raven.min.js" crossorigin="anonymous"></script>
+<!-- <script>Raven.config('https://e6e9e19d380c4b6380a0d8bd924a5602@sentry.io/106346').install();</script> -->
 <% if flash[:sentry_event_id] %>
   <script>
   Raven.showReportDialog({
     eventId: '<%= flash[:sentry_event_id] %>',
     // use the public DSN (dont include your secret!)
-    dsn: 'https://e6e9e19d380c4b6380a0d8bd924a5602@sentry.io/106346'
+    dsn: 'https://d6c7db3992ad472c8bcf9045d3cd02fc@sentry.io/108610'
   });
   </script>
 <% end %>
