@@ -25,7 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'rails_12factor', group: :production
 gem 'puma'
-gem 'sentry-raven'
+gem 'sentry-raven', '2.7.1'
 gem 'figaro'
 
 # Use ActiveModel has_secure_password

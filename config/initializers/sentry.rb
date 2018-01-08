@@ -1,10 +1,9 @@
 Raven.configure do |config|
-  config.current_environment = 'production'
-  config.dsn = 'https://e6e9e19d380c4b6380a0d8bd924a5602:1c4c3678e3e1401ba527cd8e7638c73d@getsentry.com/106346' if 'https://e6e9e19d380c4b6380a0d8bd924a5602:1c4c3678e3e1401ba527cd8e7638c73d@sentry.io/106346'
+  config.rails_activesupport_breadcrumbs = true
+  config.processors -= [Raven::Processor::PostData]
 end
 
 #meredith.a.heller@gmail.com test project
 # Raven.configure do |config|
-  # config.environments = ['production']
-#   config.dsn = 'https://d6c7db3992ad472c8bcf9045d3cd02fc:f49284c3aa244746baeddd2d22501893@sentry.io/108610'
+#   config.dsn = 'http://dcfa6e0ce9024998a374de600f1f3cca:89fee579018344d29edf323b19a0e417@dev.getsentry.net:8000/2'
 # end

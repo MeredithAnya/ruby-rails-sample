@@ -2,15 +2,30 @@ class WelcomeController < ApplicationController
 
   def index
     @user = "meredith"
-    begin
-      1 / 0
-    rescue StandardError => detail
-      Raven.captureException(detail)
-      flash[:sentry_event_id] = Raven.last_event_id()
-    else
-      render :index
-    end
+    @person = 'meredith'
+    @person.hello
+    # begin
+    #   1 / 0
+    # rescue StandardError => detail
+    #   Raven.captureException(detail)
+    #   flash[:sentry_event_id] = Raven.last_event_id()
+    # else
+    #   render :index
+    # end
     render :index
+  end
+
+  def new
+    @welcome = 'meredith'
+    render :new
+  end
+
+  def create
+    begin
+      raise 'darn'
+    rescue => detail
+      Raven.captureException(detail)
+    end
   end
 
   def show
@@ -18,13 +33,17 @@ class WelcomeController < ApplicationController
       raise "meow"
     rescue => detail
       Raven.annotate_exception(detail, {
-          tags: {
-            "meow" => "cat"
-          },
-          extra: {
-            "testing_length" => "Where does it come from? Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, comes from a line in section 1.10.32. The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from  by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham. Meing, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
-          }
-        })
+        extra: { "searchParams":{"cashoutOnly":true},
+        "url":"https://obgapi.bpsgameserver.com/api/sb/v1/open-coupons/",
+        "search":{"queryEncoder":{},"paramsMap":{},"rawParams":""},
+        "OverridesBaseUrl":true,
+        "headers":{"brandId":["11a81f20-a960-49e4-8748-51f750c1b27c"],
+          "Content-Type":["application/json"],
+          "marketCode":["en"],
+          "sportsbookToken":["ew0KICAiYWxnIjogIkhTMjU2IiwNCiAgInR5cCI6ICJKV1QiDQp9.ew0KICAidG9rZW4iOiAiZDE0MDllMjktODAyYS00ZjJmLTlkMDYtZTM1MTA5ZDg2ZTgzIiwNCiAgInNlZ21lbnRJZCI6ICI1MjEiLA0KICAibWVyY2hhbnRJZCI6IG51bGwNCn0.XTSjWTGU2bOhf7np00E5XINrF8oYBdzM63BlAmiWOWo"],
+          "sessionToken":["ew0KICAiYWxnIjogIkhTMjU2IiwNCiAgInR5cCI6ICJKV1QiDQp9.ew0KICAidXNlcklkIjogIjk3OWE0YzRlLTA4NDQtNDY2OS05ZDgxLWZmZTVjNGIwYWI4YSIsDQogICJsb2dpblNlc3Npb25JZCI6ICJkYjBmMTZhZC03YTk3LTQwYTYtYjRiMy0zMzJkYzRhYmE1N2QiLA0KICAianVyaXNkaWN0aW9uIjogIlVua25vd24iDQp9.cEYql5F86g2E5V7wfGjuMOOcKYteFiVNaojxyq8rBSw"]}
+        },
+        tags: {hi: 'merdith'}})
       Raven.captureException(detail)
     else
       render :show
