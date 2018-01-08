@@ -3,7 +3,6 @@ class WelcomeController < ApplicationController
   def index
     @user = "meredith"
     @person = 'meredith'
-    @person.hello
     # begin
     #   1 / 0
     # rescue StandardError => detail
